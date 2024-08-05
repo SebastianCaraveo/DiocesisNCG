@@ -1,0 +1,72 @@
+.title-box {
+    background-color: #ffcc00;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.main-title {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 32px;
+    color: #161616;
+    margin-bottom: 10px;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.card {
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.count-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; 
+}
+
+.sacrament-count {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.count-box {
+    background-color: #388E3C;
+    border-radius: 5px;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    flex: 1 1 auto; 
+}
+
+.count-box p,
+.count-box h2 {
+    text-align: center;
+    margin: 0;
+    color: #f9f9f9;
+}
+
+.total-box {
+    background-color: #FFD700;
+    border-radius: 5px;
+    box-shadow: 3px 2px 5px rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    margin-bottom: 10px;
+    flex: 1 1 auto; 
+}
+
+.total-box p {
+    text-align: center;
+    margin: 0;
+}

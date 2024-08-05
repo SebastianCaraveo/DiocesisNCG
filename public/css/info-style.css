@@ -1,0 +1,70 @@
+.color-b{
+    border: #a7bfc7 2px solid; background-color: white;
+}
+.color-e{
+    border: #008080 2px solid; background-color: white;
+}
+.color-c{
+    border: #900603 2px solid; background-color: white;
+}
+.color-m{
+    border: #a87b05 2px solid; background-color: white;
+}
+
+.color-input-search{
+    border: #a87b05 2px solid; background-color: #EEF4ED;
+}
+.custom-btn{
+    width: 100px;
+    height: 38px;
+}
+.btn-functions{
+    width: 250px;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+}
+
+#sacerdoteDropdown1 {
+    max-height: 200px; /* Ajusta según tus necesidades */
+    overflow-y: auto;
+}
+
+#sacerdoteDropdown1 li{
+    padding: 8px;
+}
+
+#sacerdoteDropdown2{
+    max-height: 200px; /* Ajusta según tus necesidades */
+    overflow-y: auto;
+}
+
+#sacerdoteDropdown2 li{
+    padding: 8px;
+}
+
+
+#sacerdoteDropdown3 {
+    max-height: 200px; /* Ajusta según tus necesidades */
+    overflow-y: auto;
+}
+
+#sacerdoteDropdown3 li{
+    padding: 8px;
+}
+
+#sacerdoteDropdown4 {
+    max-height: 200px; /* Ajusta según tus necesidades */
+    overflow-y: auto;
+}
+
+#sacerdoteDropdown4 li{
+    padding: 8px;
+}
+
+.sticky-top {
+    position: static;
+    top: 0;
+    background-color: white; /* Ajusta según tus necesidades */
+    z-index: 1000; /* Ajusta según tus necesidades */
+}
