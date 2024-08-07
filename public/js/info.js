@@ -24,23 +24,3 @@ $(document).ready(function() {
     });
 
 });
-
-
-/* document.addEventListener('DOMContentLoaded', function() {
-    const checkboxes = ['flexCheckDefault1', 'flexCheckDefault2', 'flexCheckDefault3', 'flexCheckDefault4'];
-    const inputs = ['capillaInput1', 'capillaInput2', 'capillaInput3', 'capillaInput4'];
-  
-    checkboxes.forEach((checkboxId, index) => {
-      const checkbox = document.getElementById(checkboxId);
-      const input = document.getElementById(inputs[index]);
-  
-      checkbox.addEventListener('change', function() {
-        if (this.checked) {
-          input.style.display = 'block';
-        } else {
-          input.style.display = 'none';
-        }
-      });
-    });
-  });
-   */

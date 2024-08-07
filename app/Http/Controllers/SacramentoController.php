@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Sacramento;
 use App\Models\Parroquia;
 use App\Models\Persona;
+use PDF;
 
 class SacramentoController extends Controller
 {
@@ -14,6 +15,7 @@ class SacramentoController extends Controller
     {
         $parroquias = Parroquia::orderBy('nombre')->get();
         $parroquiaPredeterminada = Auth::user()->parroquia_id;
+        $tipos_sacramento = ['Bautismo', 'Comunion', 'Confirmacion', 'Matrimonio'];
 
         $queryPersona = Persona::query();
         $query = Sacramento::query();
@@ -43,7 +45,7 @@ class SacramentoController extends Controller
         }
 
         if ($request->filled('folio')) {
-            $query->whereHas('libroSacramento', function ($q) use ($request) {
+            $query->whereHas('slibroSacramento', function ($q) use ($request) {
                 $q->where('folio', $request->input('folio'));
             });
         }
@@ -60,15 +62,31 @@ class SacramentoController extends Controller
             });
         }
 
-        // Si no se proporcionan filtros, obtener todos los resultados
         if (!$request->filled('parroquia_id') && !$request->filled('tipo') && !$request->filled('numero_libro') && !$request->filled('num_letra') && !$request->filled('folio') && !$request->filled('partida') && !$request->filled('letra_partida')) {
             $sacramentos = Sacramento::with(['persona', 'libroSacramento', 'parroquia'])->paginate(10);
         } else {
-            // Obtener los resultados con las relaciones necesarias
             $sacramentos = $query->with(['persona', 'libroSacramento', 'parroquia'])->paginate(10);
         }
 
-        return view('frontend.layouts.search-section', compact('sacramentos', 'parroquias', 'parroquiaPredeterminada'));
+        return view('frontend.layouts.search-section', compact('sacramentos', 'tipos_sacramento', 'parroquias', 'parroquiaPredeterminada'));
+    }
+
+    public function generatePDF(Request $request){
+        $request -> validate([
+            'tipo_sacramento' => 'required|string',
+            'numero_libro' => 'required|integer',
+            'parroquia_id' => 'required|integer',
+        ]);
+
+        $sacramentos = Sacramento::where('tipo', $request->tipo_sacramento)
+            ->whereHas('libroSacramento', function($query) use ($request){
+                $query->where('numero_libro', $request->numero_libro)
+                    ->where('parroquia_id', $request->parroquia_id);
+            })->get();
+
+            $pdf = PDF::loadView('frontend.documents.ListRegistersPDF', compact('sacramentos'));
+
+            return $pdf->download('Lista de Registros.pdf');
     }
 
 }

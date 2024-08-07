@@ -2,7 +2,8 @@
 
 <style>
     .table tbody tr:hover td {
-        background-color: darkcyan;
+        /* background-color: darkcyan; */
+        background-color:#0077cc;
         color: white;
     }
 
@@ -147,11 +148,6 @@
         @endif
     </div>
 @endsection
-@include('frontend.components.modals.modalperson')
 
-<script>
-    function toggleTabs() {
-        const tabContent = document.getElementById('myTabContent');
-        tabContent.style.display = (tabContent.style.display === 'none' ? 'block' : 'none');
-    }
-</script>
+
+

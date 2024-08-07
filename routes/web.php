@@ -86,7 +86,7 @@ Route::group(['prefix'=>'sacramentos', 'middleware'=>'auth'], function(){
     Route::get('/', [HomeController::class, 'welcome'])->name('home');
     Route::get('/registro', [SacramentoController::class, 'search'])->name('list_registers');
 
-    Route::group(['prefix'=>'personas'], function(){
+    Route::group(['prefix'=>'busqueda'], function(){
         Route::get('/', [PersonaController::class, 'index'])->name('personas.index');
         Route::get('/personas/{id}/info', [PersonaController::class,'show'])->name('personas.show');
         Route::post('/persona/store', [PersonaController::class, 'store'])->name('personas.store');
@@ -117,6 +117,8 @@ Route::group(['prefix'=>'sacramentos', 'middleware'=>'auth'], function(){
             Route::put('/matrimonio/update/{id}', [MatrimonioController::class,'update'])->name('matrimonio.update');
             Route::delete('/matrimonio/destroy/{id}', [MatrimonioController::class,'destroy'])->name('matrimonio.destroy');
         });
+
+        Route::post('/generate-document', [SacramentoController::class, 'SacramentoController@generatePDF'])->name('print-list');
     });
 
 

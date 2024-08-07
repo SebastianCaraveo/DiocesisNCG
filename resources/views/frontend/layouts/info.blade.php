@@ -57,7 +57,6 @@
 
         {{-- Contenido de pestañas --}}
         <div class="tab-content" id="nav-tabContent">
-
             {{-- Informacion General --}}
             <div class="tab-pane fade" id="nav-info" role="tabpanel" aria-labelledby="nav-info-tab" tabindex="0">
                 <div class="p-3">
@@ -200,61 +199,55 @@
                                     <div>
                                         <input value="{{ $persona->id }}" name="idPerson" type="hidden" readonly>
                                     </div>
-                                    <div class="row d-flex align-items-center justify-content-start">
-                                        <div class="col-md-1 m-0">
-                                            <label for="nombrePersona" class="form-label m-0"
-                                                style="font-weight: bold; padding-left: 15px;">Nombre:</label>
+                                    <div class="row">
+                                        <div class="col-md-auto">
+                                            <label for="nombrePersona" class="form-label fw-bolder">Nombre:</label>
                                         </div>
-                                        <div class="col-md-11 m-0">
+                                        <div class="col">
                                             <input type="text" class="form-control color-b" id="nombrePersona"
                                                 name="nombrePersona" value="{{ $persona->nombre }}" readonly>
                                         </div>
                                     </div>
 
-                                    <div class="row no-gutters mt-2 d-flex align-items-center">
-                                        <div class="col-md-1 m-0 justify-content-end">
-                                            <label for="generoPersona" class="form-label m-0"
-                                                style="font-weight: bold; padding-left: 15px;">Hij</label>
+                                    <div class="row mt-2 d-flex">
+                                        <div class="col-md-auto p-2">
+                                            <label for="generoPersona" class="form-label fw-bolder">Hij</label>
                                         </div>
-                                        <div class="col-md-1 m-0">
+                                        <div class="col-md-1">
                                             <input type="text" class="form-control color-b" id="generoPersona"
-                                                name="generoPersona"
+                                            style="width: 50px;"                                                name="generoPersona"
                                                 value="{{ $persona->genero == 'Masculino' ? 'O' : 'A' }}" readonly>
                                         </div>
-                                        <div class="col-md-1 m-0 justify-content-start">
-                                            <label class="form-label m-0"
-                                                style="font-weight: bold; padding-left: 15px;">Sr.</label>
+                                        <div class="col-md-auto p-2">
+                                            <label class="form-label fw-bolder">Sr.</label>
                                         </div>
-                                        <div class="col-md-4 m-0">
+                                        <div class="col">
                                             <input type="text" class="form-control color-b" id="padrePersona"
                                                 name="padrePersona" value="{{ $persona->nombre_papa }}" readonly>
                                         </div>
-                                        <div class="col-md-1 m-0 justify-content-start">
-                                            <label class="form-label"
-                                                style="font-weight: bold; padding-left: 15px;">Sra.</label>
+                                        <div class="col-md-auto p-2">
+                                            <label class="form-label fw-bolder">Sra.</label>
                                         </div>
-                                        <div class="col-md-4 m-0">
+                                        <div class="col">
                                             <input type="text" class="form-control color-b" id="madrePersona"
                                                 name="madrePersona" value="{{ $persona->nombre_mama }}" readonly>
                                         </div>
                                     </div>
 
-                                    <div class="row mt-2 d-flex align-items-center justify-content-start">
-                                        <div class="col-md-2 m-0">
-                                            <label class="form-label m-0"
-                                                style="font-weight: bold; padding-left: 15px;">Nacio
+                                    <div class="row mt-2 d-flex">
+                                        <div class="col-md-auto">
+                                            <label class="form-label fw-bolder">Nacio
                                                 el</label>
                                         </div>
-                                        <div class="col-md-4 m-0">
+                                        <div class="col">
                                             <input type="text" class="form-control color-b" id="nacimientoPersona"
                                                 name="nacimientoPersona"
                                                 value="{{ $persona->fecha_nacimiento['cadena'] }}" readonly>
                                         </div>
-                                        <div class="col-md-1 m-0">
-                                            <label class="form-label m-0"
-                                                style="font-weight: bold; padding-left: 15px;">en</label>
+                                        <div class="col-md-auto">
+                                            <label class="form-label fw-bolder">en</label>
                                         </div>
-                                        <div class="col-md-5 m-0">
+                                        <div class="col">
                                             <input type="text" class="form-control color-b" id="lugarPersona"
                                                 name="lugarPersona" value="{{ $persona->lugar_nacimiento }}" readonly>
                                         </div>
@@ -1384,12 +1377,29 @@
             });
         </script>
 
-        <script>
-            function toggleTabs() {
-                const tabContent = document.getElementById('myTabContent');
-                tabContent.style.display = (tabContent.style.display === 'none' ? 'block' : 'none');
-            }
-        </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script>
+    function toggleTabs() {
+        const tabs = document.getElementById('myTab');
+        const content = document.getElementById('myTabContent');
+        const button = document.querySelector('.toggle-btn');
+        const icon = button.querySelector('svg');
+
+        tabs.classList.toggle('d-none');
+        content.classList.toggle('d-none');
+
+        if (icon.classList.contains('bi-caret-up-fill')) {
+            icon.outerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                    <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                                  </svg>`;
+        } else {
+            icon.outerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
+                                    <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+                                  </svg>`;
+        }
+    }
+</script>
 
     @endsection
     @include('frontend.components.modals.modalEditPerson')

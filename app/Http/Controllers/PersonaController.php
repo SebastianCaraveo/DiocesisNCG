@@ -18,12 +18,15 @@ use App\Models\Comunion;
 use App\Models\Registro;
 use App\Models\Persona;
 use App\Models\Parroco;
+use PDF;
 
 class PersonaController extends Controller
 {
     public function index(Request $r)
     {
         $query = Persona::query();
+
+        $tipos_sacramento = ['Bautismo', 'Comunion', 'Confirmacion', 'Matrimonio'];
 
         $parroquias = Parroquia::orderBy('nombre')->get();
         $parroquiaPredeterminada = Auth::user()->parroquia_id;
@@ -56,13 +59,13 @@ class PersonaController extends Controller
         $personas = Persona::whereIn('id', $idsPersonas)->orderBy('id', 'asc')->get();
 
         if ($personas->isEmpty()) {
-            return view('frontend.layouts.person');
+            return view('frontend.layouts.search-section', compact('parroquias', 'parroquiaPredeterminada', 'tipos_sacramento'));
         } else {
             $perPage = 10;
             $page = $r->input('page', 1);
             $paginatedPersons = $query->paginate($perPage, ['*'], 'page', $page);
 
-            return view('frontend.layouts.search-section', compact('paginatedPersons', 'nombre', 'parroquias', 'parroquiaPredeterminada'));
+            return view('frontend.layouts.search-section', compact('paginatedPersons','tipos_sacramento', 'nombre', 'parroquias', 'parroquiaPredeterminada'));
         }
     }
 
@@ -116,26 +119,19 @@ class PersonaController extends Controller
     public function destroy($id)
     {
         $persona = Persona::findOrFail($id);
-
-        // Iniciar una transacción para asegurar la consistencia de la base de datos
         DB::beginTransaction();
 
         try {
-            // Verificar si la persona tiene sacramentos
             if ($persona->sacramentos->isNotEmpty()) {
                 foreach ($persona->sacramentos as $sacramento) {
-                    // Eliminar datos ligados al sacramento (Bautismo, Comunion, etc.)
                     $sacramento->bautismo()->delete();
                     $sacramento->comunion()->delete();
                     $sacramento->confirmacion()->delete();
                     $sacramento->matrimonio()->delete();
 
-                    // Eliminar el registro de Sacramento
                     $sacramento->delete();
 
-                    // Verificar si hay un libro_sacramento asociado
                     if ($sacramento->libroSacramento) {
-                        // Eliminar el registro de LibroSacramento
                         $sacramento->libroSacramento->delete();
                     }
                 }
@@ -167,6 +163,7 @@ class PersonaController extends Controller
         $parroquias = Parroquia::all();
         $parroquiaPredeterminada = Auth::user()->parroquia_id;
         $sacerdotes = Sacerdote::all();
+        $tipos_sacramento = ['Bautismo', 'Comunion', 'Confirmacion', 'Matrimonio'];
 
         $libro = $persona->sacramentos->map(function ($sacramento) {
             return [
@@ -211,6 +208,6 @@ class PersonaController extends Controller
             $matrimonioData = $persona->sacramentos()->where('tipo', 'matrimonio')->with('matrimonio')->first()->matrimonio;
         }
 
-        return view('frontend.layouts.info', compact('libro', 'persona', 'parroquias', 'parroquiaPredeterminada', 'sacerdotes', 'sacramentosPersona', 'bautismoData', 'comunionData', 'confirmacionData', 'matrimonioData'));
+        return view('frontend.layouts.info', compact('libro', 'persona', 'parroquias', 'tipos_sacramento', 'parroquiaPredeterminada', 'sacerdotes', 'sacramentosPersona', 'bautismoData', 'comunionData', 'confirmacionData', 'matrimonioData'));
     }
 }
