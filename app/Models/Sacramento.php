@@ -12,9 +12,9 @@ class Sacramento extends Model
     protected $table= 'sacramentos';
 
     protected $fillable = [
-        'persona_id', 
-        'tipo', 
-        'parroquia_id', 
+        'persona_id',
+        'tipo',
+        'parroquia_id',
         'libro_sacramento_id',
     ];
 

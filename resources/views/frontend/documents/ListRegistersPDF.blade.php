@@ -1,26 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Documento de Sacramentos</title>
+    <title>Documento</title>
 </head>
 <body>
-    <h1>Documento de Sacramentos</h1>
+    <h1>Registros de {{ $tipo_sacramento }}</h1>
     <table>
         <thead>
             <tr>
-                <th>Persona</th>
-                <th>Tipo</th>
+                <th>Folio</th>
+                <th>Partida</th>
+                <th>Tipo de Sacramento</th>
                 <th>Parroquia</th>
                 <th>Número de Libro</th>
+                <th>Letra</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($sacramentos as $sacramento)
-                <tr>
-                    <td>{{ $sacramento->persona->nombre }}</td>
-                    <td>{{ $sacramento->tipo }}</td>
-                    <td>{{ $sacramento->parroquia->nombre }}</td>
-                    <td>{{ $sacramento->libroSacramento->numero_libro }}</td>
+            @foreach($registros as $registro)
+            <tr>
+                    <td>{{ $registro->numero_libro }}</td>
+                    <td>{{ $registro->num_letra ?? 'N/A' }}</td>
+                    <td>{{ $registro->folio }}</td>
+                    <td>{{ $registro->partida }}</td>
+                    <td>{{ $registro->tipo_sacramento }}</td>
+                    <td>{{ $registro->parroquia->nombre ?? 'N/A'}}</td>
+                    <td>{{ $registro->persona->nombre ?? 'N/A' }}</td>
                 </tr>
             @endforeach
         </tbody>

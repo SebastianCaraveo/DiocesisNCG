@@ -36,4 +36,9 @@ class LibroSacramento extends Model
     {
         return $this->hasMany(Sacramento::class, 'libro_sacramento_id');
     }
+
+    public function persona()
+    {
+        return $this->belongsTo(Persona::class, 'id_persona');
+    }
 }

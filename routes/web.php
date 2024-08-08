@@ -118,7 +118,7 @@ Route::group(['prefix'=>'sacramentos', 'middleware'=>'auth'], function(){
             Route::delete('/matrimonio/destroy/{id}', [MatrimonioController::class,'destroy'])->name('matrimonio.destroy');
         });
 
-        Route::post('/generate-document', [SacramentoController::class, 'SacramentoController@generatePDF'])->name('print-list');
+        Route::post('/generate-document', [SacramentoController::class, 'generatePDF'])->name('generate-document');
     });
 
 
