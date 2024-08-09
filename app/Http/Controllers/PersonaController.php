@@ -29,7 +29,7 @@ class PersonaController extends Controller
         $tipos_sacramento = ['Bautismo', 'Comunion', 'Confirmacion', 'Matrimonio'];
 
         $parroquias = Parroquia::orderBy('nombre')->get();
-        $parroquiaPredeterminada = Auth::user()->parroquia_id;
+        $parroquiaUsuario = auth()->user()->parroquia_id;
 
         $nombre = $r->input('nombre');
         $query->where(function($q) use ($nombre) {
@@ -65,7 +65,7 @@ class PersonaController extends Controller
             $page = $r->input('page', 1);
             $paginatedPersons = $query->paginate($perPage, ['*'], 'page', $page);
 
-            return view('frontend.layouts.search-section', compact('paginatedPersons','tipos_sacramento', 'nombre', 'parroquias', 'parroquiaPredeterminada'));
+            return view('frontend.layouts.search-section', compact('paginatedPersons','tipos_sacramento', 'nombre', 'parroquias', 'parroquiaUsuario'));
         }
     }
 
@@ -160,8 +160,8 @@ class PersonaController extends Controller
             'sacramentos.libroSacramento',
         ])->find($id);
 
-        $parroquias = Parroquia::all();
-        $parroquiaPredeterminada = Auth::user()->parroquia_id;
+        $parroquias = Parroquia::orderBy('nombre')->get();
+        $parroquiaUsuario = auth()->user()->parroquia_id;
         $sacerdotes = Sacerdote::all();
         $tipos_sacramento = ['Bautismo', 'Comunion', 'Confirmacion', 'Matrimonio'];
 
@@ -208,6 +208,6 @@ class PersonaController extends Controller
             $matrimonioData = $persona->sacramentos()->where('tipo', 'matrimonio')->with('matrimonio')->first()->matrimonio;
         }
 
-        return view('frontend.layouts.info', compact('libro', 'persona', 'parroquias', 'tipos_sacramento', 'parroquiaPredeterminada', 'sacerdotes', 'sacramentosPersona', 'bautismoData', 'comunionData', 'confirmacionData', 'matrimonioData'));
+        return view('frontend.layouts.info', compact('libro', 'persona', 'parroquias', 'tipos_sacramento', 'parroquiaUsuario', 'sacerdotes', 'sacramentosPersona', 'bautismoData', 'comunionData', 'confirmacionData', 'matrimonioData'));
     }
 }

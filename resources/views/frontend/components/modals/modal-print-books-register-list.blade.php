@@ -32,7 +32,9 @@
                         <label for="parroquia_id">Parroquia</label>
                         <select name="parroquia_id" id="parroquia_id" class="form-control">
                             @foreach ($parroquias as $parroquia)
-                                <option value="{{ $parroquia->id }}">{{ $parroquia->nombre }}</option>
+                                <option value="{{ $parroquia->id }}" {{ $parroquia->id == $parroquiaUsuario ? 'selected' : '' }}>
+                                    {{ $parroquia->nombre }}
+                                </option>
                             @endforeach
                         </select>
                     </div>

@@ -133,7 +133,7 @@
                                 aria-label="Seleccionar parroquia">
                                 @foreach ($parroquias as $parroquia)
                                     <option value="{{ $parroquia->id }}"
-                                        {{ $parroquia->id == $parroquiaPredeterminada ? 'selected' : '' }}>
+                                        {{ $parroquia->id == $parroquiaUsuario ? 'selected' : '' }}>
                                         {{ $parroquia->nombre }}</option>
                                 @endforeach
                             </select>
