@@ -39,6 +39,6 @@ class LibroSacramento extends Model
 
     public function persona()
     {
-        return $this->belongsTo(Persona::class, 'id_persona');
+        return $this->hasOneThrough(Persona::class, Sacramento::class, 'libro_sacramento_id', 'id', 'id', 'persona_id');
     }
 }

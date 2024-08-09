@@ -20,7 +20,7 @@ class Sacramento extends Model
 
     public function persona()
     {
-        return $this->belongsTo(Persona::class);
+        return $this->belongsTo(Persona::class, 'persona_id');
     }
 
     public function parroquia()

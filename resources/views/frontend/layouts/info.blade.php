@@ -459,8 +459,8 @@
                                     </div>
 
                                     {{-- Fila 14 --}}
-                                    <div class="row justify-content-end mt-2">
-                                        <div class="col-md-3">
+                                    <div class="row justify-content-end mt-3">
+                                        <div class="col-md-3 d-flex justify-content-end">
                                             <button type="submit" class="btn btn-success btn-lg">Registrar
                                                 Sacramento</button>
                                         </div>
@@ -865,9 +865,9 @@
                                         <div class="col-md-auto p-2">
                                             <label for="generoPersona" class="form-label fw-bolder">Bautizad</label>
                                         </div>
-                                        <div class="col">
+                                        <div class="col-md-1">
                                             <input type="text" class="form-control color-c" id="generoPersona"
-                                                name="generoPersona"
+                                                name="generoPersona" style="width: 50px;"
                                                 value="{{ $persona->genero == 'Masculino' ? 'O' : 'A' }}" readonly>
                                         </div>
                                         <div class="col-md-auto p-2">
@@ -877,20 +877,20 @@
                                         </div>
                                         <div class="col">
                                             <input type="text" class="form-control color-c" id="bautismo_parroquia"
-                                                name="parroquia_bautismo">
+                                                name="parroquia_bautismo" placeholder="Parroquia donde haya sido bautizado">
                                         </div>
                                     </div>
 
                                     <div class="row mt-2">
                                         <div class="col-md-auto p-2">
-                                            <label class="form-label fw-bolder">en</label>
+                                            <label class="form-label fw-bolder">En</label>
                                         </div>
                                         <div class="col">
                                             <input type="text" class="form-control color-c" id="municipio_bautismo"
-                                                name="municipio_bautismo">
+                                                name="municipio_bautismo" placeholder="Localidad donde haya sido bautizado (Ej. Nuevo Casas Grandes, Chih.)">
                                         </div>
                                         <div class="col-md-auto p-2">
-                                            <label class="form-label fw-bolder">el</label>
+                                            <label class="form-label fw-bolder">El</label>
                                         </div>
                                         <div class="col">
                                             <input type="date" class="form-control color-c" id="fecha_bautismo"
